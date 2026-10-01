@@ -13,7 +13,9 @@ open-source code-signing certificate described in `CERTUM-ONBOARDING.md`.
 5. Open and review the complete source/workflow diff.
 6. Push the reviewed commit to `main` and confirm CI succeeds.
 7. Create and push the matching annotated `v*` tag.
-8. GitHub Actions builds and uploads the unsigned executable as a GitHub artifact.
+8. The **Prepare unsigned signing candidate** workflow builds, hashes, attests, and
+   uploads the unsigned executable as a GitHub artifact retained for 90 days. It
+   deliberately does not publish a GitHub release.
 9. Download that exact artifact to the dedicated release-signing workstation. Record
    its SHA-256 hash and the source workflow URL before making any change.
 10. Sign `Offhand.exe` with Certum SimplySign and an RFC 3161 timestamp. Do not rebuild,

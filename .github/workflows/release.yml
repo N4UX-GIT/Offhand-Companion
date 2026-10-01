@@ -1,4 +1,4 @@
-name: Sign and release
+name: Prepare unsigned signing candidate
 
 on:
   push:
@@ -6,13 +6,12 @@ on:
       - 'v*'
 
 permissions:
-  contents: write
-  actions: read
+  contents: read
   id-token: write
   attestations: write
 
 jobs:
-  sign-and-release:
+  prepare-signing-candidate:
     runs-on: windows-latest
     steps:
       - name: Checkout tagged source
@@ -30,51 +29,33 @@ jobs:
         shell: cmd
         run: build.bat dist\unsigned\Offhand.exe
 
-      - name: Upload unsigned artifact for SignPath origin verification
+      - name: Record unsigned artifact hash
+        shell: powershell
+        run: Get-FileHash -Algorithm SHA256 -LiteralPath .\dist\unsigned\Offhand.exe | Format-List
+
+      - name: Upload unsigned artifact for manual certificate signing
         id: upload-unsigned
         uses: actions/upload-artifact@v4
         with:
           name: offhand-companion-unsigned-${{ github.sha }}
           path: dist/unsigned/Offhand.exe
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 90
 
-      - name: Submit SignPath release-signing request
-        id: signpath
-        uses: signpath/github-action-submit-signing-request@v3
-        with:
-          api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
-          organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
-          project-slug: 'offhand-companion'
-          signing-policy-slug: 'release-signing'
-          github-artifact-id: '${{ steps.upload-unsigned.outputs.artifact-id }}'
-          wait-for-completion: true
-          wait-for-completion-timeout-in-seconds: 3600
-          output-artifact-directory: '${{ github.workspace }}\dist\signed'
-
-      - name: Verify signed executable and package release
-        shell: powershell
-        run: |
-          .\scripts\New-Release.ps1 `
-            -Version '${{ github.ref_name }}'.TrimStart('v') `
-            -SignedArtifactDirectory .\dist\signed `
-            -RequireSignPathSignature
-
-      - name: Attest signed release artifacts
+      - name: Attest unsigned signing candidate
         uses: actions/attest@v4
         with:
-          subject-path: |
-            dist/release/Offhand.exe
-            dist/release/Offhand-Companion.zip
-            dist/release/checksums-sha256.txt
+          subject-path: dist/unsigned/Offhand.exe
 
-      - name: Publish immutable GitHub release
-        uses: softprops/action-gh-release@v2
-        with:
-          prerelease: ${{ contains(github.ref_name, '-') }}
-          generate_release_notes: true
-          files: |
-            dist/release/Offhand.exe
-            dist/release/Offhand-Companion.zip
-            dist/release/checksums-sha256.txt
+      - name: Record signing handoff
+        shell: powershell
+        run: |
+          @"
+          ## Unsigned signing candidate prepared
 
+          Download the `offhand-companion-unsigned-${{ github.sha }}` workflow
+          artifact and record its SHA-256 before signing the contained executable.
+          Sign those exact bytes through the approved certificate provider; do not
+          rebuild the executable locally. Follow `docs/RELEASE.md` for verification,
+          packaging, vendor submission, and publication.
+          "@ | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY

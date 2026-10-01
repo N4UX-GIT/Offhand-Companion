@@ -15,10 +15,40 @@ material in this repository.
 - Intended signed files: `Offhand.exe`; the signed executable is then placed in
   `Offhand-Companion.zip` and, if pursued later, the Store MSIX.
 
-The low-cost open-source product may periodically be unavailable in Certum's
-store. Confirm availability, Norwegian individual eligibility, exact identity
-documents, renewal pricing, and whether an authorized reseller can fulfil the
-same product before purchasing an alternative certificate.
+On 2026-10-01, Certum's direct store marked all three open-source variants out of
+stock: Cloud / SimplySign (€49), the physical card set (€69), and the activation
+code for an existing card (€25). Contact Certum before purchasing a more expensive
+certificate and ask for a restock date or an authorized reseller able to supply the
+same individual open-source product. Also confirm Norwegian individual eligibility,
+the exact identity documents, delivery cost if hardware is proposed, and renewal
+pricing.
+
+## Certum availability enquiry
+
+Use Certum's official contact form or support address. Do not send identity files
+with the initial enquiry.
+
+> Subject: Open Source Code Signing availability for Norwegian individual developer
+>
+> Hello,
+>
+> I maintain Offhand Companion, a free MIT-licensed Windows utility published from
+> the public repository https://github.com/N4UX-GIT/Offhand-Companion. I am an
+> individual developer resident in Norway, not a company. Your store currently
+> marks the Open Source Code Signing in the Cloud, card set, and activation-code
+> products as out of stock.
+>
+> Could you confirm whether the individual Open Source Code Signing certificate is
+> still available, its expected restock date, and whether an authorized reseller can
+> currently supply it? I would prefer the €49 SimplySign cloud option, but I can
+> consider the €69 card set if it can be delivered to Norway. Please also confirm
+> that a Norwegian individual applicant is eligible and whether the published
+> identity, utility-bill, and public-project evidence requirements are complete.
+>
+> Project website: https://offhand-wow.onrender.com/
+> Addon listing: https://www.curseforge.com/wow/addons/offhand
+>
+> Thank you.
 
 ## Information prepared for the application
 
