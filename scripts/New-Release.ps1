@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$Version,
     [Parameter(Mandatory = $true)][string]$SignedArtifactDirectory,
-    [switch]$RequireSignPathSignature
+    [string]$ExpectedSignerPattern
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,9 +19,9 @@ if ($signature.Status -ne 'Valid') {
 if ($null -eq $signature.TimeStamperCertificate) {
     throw 'The signed executable does not contain a trusted timestamp.'
 }
-if ($RequireSignPathSignature -and
-    ($null -eq $signature.SignerCertificate -or $signature.SignerCertificate.Subject -notmatch 'SignPath Foundation')) {
-    throw "Expected a SignPath Foundation signer; found '$($signature.SignerCertificate.Subject)'."
+if ($ExpectedSignerPattern -and
+    ($null -eq $signature.SignerCertificate -or $signature.SignerCertificate.Subject -notmatch $ExpectedSignerPattern)) {
+    throw "Signer did not match '$ExpectedSignerPattern'; found '$($signature.SignerCertificate.Subject)'."
 }
 
 $versionInfo = $candidates[0].VersionInfo

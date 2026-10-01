@@ -1,4 +1,10 @@
-# SignPath Foundation onboarding
+# Historical SignPath Foundation application
+
+> This route is not currently active. The Foundation application was declined in
+> October 2026 because the project did not yet have sufficient independent public
+> visibility signals. The response explicitly encouraged a future reapplication
+> after the project develops broader adoption, references, and contributor activity.
+> Current signing preparation is documented in `CERTUM-ONBOARDING.md`.
 
 This file records the project information and the remaining external setup. Do not
 store API tokens or certificate material in the repository.

@@ -10,12 +10,11 @@ The Companion is free, open-source software licensed under the MIT License. It i
 non-commercial and contains no advertising, telemetry, analytics, account system,
 or automatic background updater.
 
-> **Signing status:** This repository is being prepared for free open-source code
-> signing through SignPath.io with a certificate provided by SignPath Foundation.
-> Until that application is accepted and a signed release is published, verify
-> downloads using the release SHA-256 checksums and GitHub build provenance.
-
-Free code signing provided by SignPath.io, certificate by SignPath Foundation.
+> **Signing status:** The SignPath Foundation application was not accepted because
+> the project does not yet have enough independent public visibility signals. We
+> are preparing an individual open-source code-signing application through Certum.
+> Until a signed release is published and independently scanned, the recommended
+> public fallback is the addon's no-executable manual spanning procedure.
 
 ## Security and trust
 
@@ -23,8 +22,9 @@ Free code signing provided by SignPath.io, certificate by SignPath Foundation.
 - Read the [privacy statement](PRIVACY.md).
 - Read the project's [code signing policy](CODE_SIGNING_POLICY.md).
 - Official release artifacts are built on GitHub-hosted Windows runners.
-- Signing requests will be submitted directly from the GitHub Actions build that
-  produced the artifact; local binaries are never substituted into that process.
+- Signing uses the exact unsigned artifact produced by GitHub Actions. The artifact
+  may be signed through Certum's cloud-backed SimplySign client, but it is never
+  rebuilt or substituted after CI.
 - Signed releases will be timestamped and checked with Windows Authenticode before
   publication.
 
@@ -73,9 +73,9 @@ Beta 13 Companion. The first signed artifact will be treated as a deliberate
 Companion release because Authenticode signing necessarily changes its bytes and
 SHA-256 hash. Existing unsigned Beta 13 artifacts will not be silently replaced.
 
-The release process is documented in [docs/RELEASE.md](docs/RELEASE.md). SignPath
-onboarding and application details are in
-[docs/SIGNPATH-ONBOARDING.md](docs/SIGNPATH-ONBOARDING.md).
+The release process is documented in [docs/RELEASE.md](docs/RELEASE.md). Certum
+application and setup details are in
+[docs/CERTUM-ONBOARDING.md](docs/CERTUM-ONBOARDING.md).
 Release-specific changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
 ## Linux/Wine
