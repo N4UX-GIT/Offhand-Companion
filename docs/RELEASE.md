@@ -5,10 +5,8 @@ and SignPath settings in `SIGNPATH-ONBOARDING.md` are complete.
 
 1. Make only intentional Companion changes. Addon-only releases do not require a new
    Companion build.
-2. Update all three assembly version attributes in `Source/Program.cs` and keep the
+2. Update the assembly file/informational versions and manifest identity. Keep the
    informational version identical to the intended Git tag without the leading `v`.
-   For the first standalone release, also move the explicit **Check for Updates** URL
-   from the combined addon repository to this repository and update its policy test.
 3. Update tests and behavior disclosures for any security-relevant change.
 4. Run `tests\run.ps1` and `build.bat` locally. Local output is for testing only and
    must never be promoted into a signed release.

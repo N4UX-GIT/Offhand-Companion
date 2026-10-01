@@ -37,8 +37,12 @@ try {
     if ($source -match 'Microsoft\.Win32|Registry\.(CurrentUser|LocalMachine)|OpenProcessToken|GetTokenInformation|TokenIntegrityLevel|advapi32\.dll|--minimized') {
         throw 'Companion must not add persistence or inspect process security tokens.'
     }
-    if ($source -notmatch 'WebClient' -or $source -notmatch 'api\.github\.com/repos/N4UX-GIT/Offhand-DualMonitor/releases/latest') {
+    if ($source -notmatch 'WebClient' -or $source -notmatch 'api\.github\.com/repos/N4UX-GIT/Offhand-Companion/releases/latest') {
         throw 'The disclosed user-initiated GitHub update check changed unexpectedly.'
+    }
+    if ($source -notmatch 'AssemblyInformationalVersionAttribute' -or
+        $source -notmatch 'CompanionReleaseVersion\.TryParse') {
+        throw 'Update checks must compare the complete Companion beta version.'
     }
     if ($source -notmatch 'AssemblyTitle\("Offhand Companion"\)' -or
         $source -notmatch 'AssemblyProduct\("Offhand Companion"\)') {
@@ -56,4 +60,3 @@ try {
 } finally {
     if (Test-Path -LiteralPath $testExe) { Remove-Item -LiteralPath $testExe -Force }
 }
-

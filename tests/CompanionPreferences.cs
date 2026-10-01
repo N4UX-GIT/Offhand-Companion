@@ -8,7 +8,14 @@ namespace Offhand.Companion {
         private static int checkNumber;
         private static void Check(bool value) { checkNumber++; if (!value) throw new Exception("Preference regression at check " + checkNumber); }
         public static void Main() {
-            Check(CompanionForm.FullVersion == "2.1.2 Beta 13");
+            Check(CompanionForm.FullVersion == "2.1.2 Beta 14");
+            CompanionReleaseVersion beta13, beta14, stable, newer;
+            Check(CompanionReleaseVersion.TryParse("v2.1.2-beta.13", out beta13));
+            Check(CompanionReleaseVersion.TryParse("2.1.2-beta.14", out beta14));
+            Check(CompanionReleaseVersion.TryParse("2.1.2", out stable));
+            Check(CompanionReleaseVersion.TryParse("2.1.3-beta.1", out newer));
+            Check(beta14.CompareTo(beta13) > 0 && stable.CompareTo(beta14) > 0 && newer.CompareTo(stable) > 0);
+            Check(!CompanionReleaseVersion.TryParse("2.1.2-preview.1", out newer));
             Check(!CompanionDefaults.AutoSpanOnLaunch);
             Check(WindowInteropDiagnostics.StyleFailure("Could not remove WoW window borders", 5)
                 .Contains("same privilege level"));
@@ -146,7 +153,7 @@ namespace Offhand.Companion {
                 string topologyMessage;
                 Check(CompanionTopologyBridge.TryWrite(wow, plan, displays, out topologyMessage));
                 string topology = File.ReadAllText(Path.Combine(core, "CompanionTopology.lua"));
-                Check(topology.Contains("mode = \"DUAL_DISPLAY\"") && topology.Contains("width = 3440") &&
+                Check(topology.Contains("mode = \"DUAL_DISPLAY\"") && topology.Contains("companionVersion = \"2.1.2-beta.14\"") && topology.Contains("width = 3440") &&
                     topology.Contains("height = 1080") && topology.Contains("y = 0"));
                 Console.WriteLine("PASS: safe display identities, addon layout diagnosis, missing-monitor guard, topology bridge, settings validation, restore geometry and atomic Forever state generation");
             } finally { if (Directory.Exists(root)) Directory.Delete(root, true); }

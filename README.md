@@ -76,6 +76,7 @@ SHA-256 hash. Existing unsigned Beta 13 artifacts will not be silently replaced.
 The release process is documented in [docs/RELEASE.md](docs/RELEASE.md). SignPath
 onboarding and application details are in
 [docs/SIGNPATH-ONBOARDING.md](docs/SIGNPATH-ONBOARDING.md).
+Release-specific changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
 ## Linux/Wine
 
