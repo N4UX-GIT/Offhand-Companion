@@ -13,17 +13,16 @@ if not exist "%CSC%" (
 
 if not exist "%CSC%" (
     echo [ERROR] Microsoft .NET Framework C# compiler was not found.
-    pause
     exit /b 1
 )
 
-set "OUT=%~dp0Offhand.exe"
+set "OUT=%~1"
+if not defined OUT set "OUT=%~dp0Offhand.exe"
+for %%I in ("%OUT%") do if not exist "%%~dpI" mkdir "%%~dpI"
 set "SRC=%~dp0Source\Program.cs"
 set "MANIFEST=%~dp0Source\app.manifest"
-set "ICO=%~dp0..\Media\offhand-logo.ico"
-set "PNG=%~dp0..\Media\offhand-logo-small.png"
-if not exist "%ICO%" set "ICO=%~dp0Media\offhand-logo.ico"
-if not exist "%PNG%" set "PNG=%~dp0Media\offhand-logo-small.png"
+set "ICO=%~dp0Media\offhand-logo.ico"
+set "PNG=%~dp0Media\offhand-logo-small.png"
 
 echo Compiling %OUT% ...
 

@@ -1,0 +1,10 @@
+Offhand.exe
+dist/
+*.user
+*.suo
+*.pfx
+*.cer
+*.snk
+*.log
+.vs/
+

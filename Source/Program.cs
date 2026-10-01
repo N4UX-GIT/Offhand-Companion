@@ -12,7 +12,7 @@ using System.Windows.Forms;
 [assembly: AssemblyTitle("Offhand Companion")]
 [assembly: AssemblyDescription("Dual-Monitor Multi-Display Controller for World of Warcraft")]
 [assembly: AssemblyCompany("Offhand Project")]
-[assembly: AssemblyProduct("Offhand")]
+[assembly: AssemblyProduct("Offhand Companion")]
 [assembly: AssemblyCopyright("Copyright (C) 2026 Offhand Project")]
 [assembly: AssemblyVersion("2.1.2.0")]
 [assembly: AssemblyFileVersion("2.1.2.13")]

@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run security and behavior tests
+        shell: powershell
+        run: .\tests\run.ps1
+
+      - name: Build unsigned release candidate
+        shell: cmd
+        run: build.bat
+
+      - name: Record unsigned artifact hash
+        shell: powershell
+        run: Get-FileHash -Algorithm SHA256 -LiteralPath .\Offhand.exe | Format-List
+
+      - name: Upload unsigned CI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: offhand-companion-unsigned-${{ github.sha }}
+          path: Offhand.exe
+          if-no-files-found: error
+          retention-days: 14
+
