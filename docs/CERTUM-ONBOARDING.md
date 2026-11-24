@@ -45,7 +45,7 @@ with the initial enquiry.
 > that a Norwegian individual applicant is eligible and whether the published
 > identity, utility-bill, and public-project evidence requirements are complete.
 >
-> Project website: https://offhand-wow.onrender.com/
+> Project website: https://offhandwow.com/
 > Addon listing: https://www.curseforge.com/wow/addons/offhand
 >
 > Thank you.
@@ -63,7 +63,7 @@ with the initial enquiry.
   `https://github.com/N4UX-GIT/Offhand-DualMonitor/releases/tag/v2.1.2-beta.13`.
 - Public addon listing:
   `https://www.curseforge.com/wow/addons/offhand`.
-- Project website: `https://offhand-wow.onrender.com/`.
+- Project website: `https://offhandwow.com/`.
 
 ## Suggested project description
 
